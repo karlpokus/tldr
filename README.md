@@ -12,14 +12,16 @@ $ alias tldr=bash path/to/tldr.sh
 
 # usage
 ```bash
-# optional: -e edit or add file
-$ tldr [-e] <cmd>
+$ tldr [-e] <file>
+# if file is missing you get a prompt to create one
+# -e to edit existing file
 ```
 
 # todos
 - [x] installing
 - [x] basic usage
 - [x] add [--edit]
+- [x] prompt to create file
 - [ ] more options in .tldr.cfg like $EDITOR and $PAGER
 - [ ] search file contents too?
 - [ ] select if multiple matches

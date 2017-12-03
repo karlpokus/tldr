@@ -4,11 +4,17 @@ CFG=~/.tldr.cfg
 CMD=$1
 
 function errquit() {
-	echo $1 && exit 1
+	echo $1
+	exit 1
 }
 
-function edit() {
-	vim "$DATADIR"/"$CMD"
+function editfile() {
+	vim $1
+	exit 0
+}
+
+function readfile() {
+	less $1
 	exit 0
 }
 
@@ -20,16 +26,22 @@ source $CFG
 [ -z "$DATADIR" ] && errquit 'Error: $DATADIR not set';
 
 # check flags
-while getopts ":a:e:" opt; do
+while getopts ":e:" opt; do
   case $opt in
-  	a)
-			CMD=$OPTARG && edit ;;
   	e)
-			CMD=$OPTARG && edit ;;
+			CMD=$OPTARG
+			editfile "$DATADIR"/"$CMD"
+			;;
   esac
 done
 
-# no flags passed so lookup file
+# no flags set - lookup file
 FILE="$DATADIR"/"$CMD"
-[ ! -f $FILE ] && errquit "Error: no such file";
-less $FILE
+
+if [ ! -f $FILE ]; then
+	read -p "Sorry. No such file. Would you like to create it? [y/n] " CREATE
+	[ $CREATE = "y" ] && editfile $FILE
+	exit 0
+else
+	readfile $FILE
+fi
