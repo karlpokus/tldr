@@ -12,14 +12,14 @@ $ alias tldr=bash path/to/tldr.sh
 
 # usage
 ```bash
-$ tldr <cmd>
+# optional: -e edit or add file
+$ tldr [-e] <cmd>
 ```
 
 # todos
 - [x] installing
 - [x] basic usage
-- [ ] add [--edit]
-- [ ] add [--add]
+- [x] add [--edit]
 - [ ] more options in .tldr.cfg like $EDITOR and $PAGER
 - [ ] search file contents too?
 - [ ] select if multiple matches
